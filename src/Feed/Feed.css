@@ -5,10 +5,12 @@
     overflow-y: scroll;
 }
 
-.feed::-webkit-scrollbar{
+/* for chrome invisible scrollbar  of overflow-y*/
+.feed::-webkit-scrollbar{  
     display: none;
 }
 
+/* for other browser invisible scrollbar of overflow-y */
 .feed{
     -ms-overflow-style: none;
     scrollbar-width: none;

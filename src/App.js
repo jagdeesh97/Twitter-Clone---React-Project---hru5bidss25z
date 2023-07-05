@@ -8,30 +8,30 @@ import TweetContext from './Context/TweetContext';
 import { useState, useEffect } from 'react';
 
 function App() {
-	const arr = window.localStorage.getItem('tweetArray')
-		? JSON.parse(window.localStorage.getItem('tweetArray'))
-		: [];
-	const [tweetArray, setTweetArray] = useState(arr);
+  const arr = window.localStorage.getItem('tweetArray')
+    ? JSON.parse(window.localStorage.getItem('tweetArray'))
+    : [];
+  const [tweetArray, setTweetArray] = useState(arr);
 
-	useEffect(() => {
-		window.localStorage.setItem('tweetArray', JSON.stringify(tweetArray));
-	}, [arr]);
+  useEffect(() => {
+    window.localStorage.setItem('tweetArray', JSON.stringify(tweetArray));
+  }, [arr]);
 
-	return (
-		<TweetContext.Provider value={{ tweetArray, setTweetArray }}>
-			<div className="app">
-				<AuthContextProvider>
-					<SideBar />
-					{/* feed section */}
-					<Protected>
-						<Feed />
-						{/* widgets section */}
-						<Widgets />
-					</Protected>
-				</AuthContextProvider>
-			</div>
-		</TweetContext.Provider>
-	);
+  return (
+    <TweetContext.Provider value={{ tweetArray, setTweetArray }}>
+      <div className="app">
+        <AuthContextProvider>
+          <SideBar />
+          {/* feed section */}
+          <Protected>
+            <Feed />
+            {/* widgets section */}
+            <Widgets />
+          </Protected>
+        </AuthContextProvider>
+      </div>
+    </TweetContext.Provider>
+  );
 }
 
 export default App;

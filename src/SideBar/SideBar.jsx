@@ -13,7 +13,6 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import SideBarOptions from "../SideBarOptions/SideBarOptions";
 import { Button } from "@mui/material";
 import { UserAuth } from "../Context/AuthContext";
-import { async } from "@firebase/util";
 import { useState, useEffect } from "react";
 
 const SideBar = () => {

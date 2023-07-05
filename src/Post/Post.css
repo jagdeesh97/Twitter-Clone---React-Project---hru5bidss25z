@@ -1,55 +1,87 @@
-.post{
-    display: flex;
-    align-items: flex-start;
-    border-bottom:  1px solid var(--twitter-background);
-    padding: 20px;
-    margin: 10px;
+.post {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--twitter-background);
+  padding: 20px;
+  margin: 10px;
 }
 
-.post-body{
-    flex: 1;
-    padding: 10px;
+.post-body {
+  flex: 1;
+  padding: 10px;
 }
 
-.post-body > img{
-    border-radius: 15px;
-    width: 100%;
+.post-body > img {
+  border-radius: 15px;
+  width: 100%;
 }
-.post-avatar{
-    padding: 20px;
-
-}
-
-.post-avatar > img{
-    height: '40px' !important; 
-    border-radius: '100%' !important;
+.post-avatar {
+  padding: 20px;
 }
 
-.post-footer{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+.post-avatar > img {
+  height: '40px' !important;
+  border-radius: '100%' !important;
 }
 
-.post-badge{
-    font-size: 14px !important;
-    color: var(--twitter-color);
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-.post-header-text > h3{
-    font-size: 15px;
-    margin-bottom: 5px;
+.post-badge {
+  font-size: 14px !important;
+  color: var(--twitter-color);
 }
 
-.post-header-special{
-    font-weight: 600;
-    font-size: 12px;
-    color: gray;
-    
+.post-header-text > h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
 }
 
-.post-header-description{
-    margin-bottom: 10px;
-    font-size: 15px;
+.post-header-special {
+  font-weight: 600;
+  font-size: 12px;
+  color: gray;
 }
 
+.post-header-description {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.icon {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+}
+.red-color {
+  color: red;
+}
+
+#comment-inp{
+  border: none;
+  width: 130px;
+}
+.comment-section{
+  display:  flex;
+  margin-top: 10px;
+  
+}
+.comment-section p{
+   margin-left: -230px;
+   margin-top: 40px;
+}
+button{
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 70px;
+  cursor: pointer;
+  border-color: gray;
+}
+.post-badge-user{
+  font-weight: 600;
+  font-size: 12px;
+  color: gray;
+}
