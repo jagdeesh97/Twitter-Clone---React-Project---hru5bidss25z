@@ -2,15 +2,13 @@ import { Avatar } from '@mui/material';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import React from 'react';
 import './Post.css';
-import moment from 'moment/moment';
-import TimeAgo from "react-timeago";
-
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import RepeatIcon from '@mui/icons-material/Repeat';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import PublishIcon from '@mui/icons-material/Publish';
 import { UserAuth } from '../Context/AuthContext';
 import { useState } from 'react';
+import moment from 'moment';
 
 
 const Post = ({ item }) => {
@@ -18,6 +16,7 @@ const Post = ({ item }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [inputText, setInputText] = useState('');
   const [userComment, setUserComment] = useState({});
+  const [display, setDisplay] = useState(false);
   
 
   return (
@@ -32,10 +31,10 @@ const Post = ({ item }) => {
         <div className="post-header">
           <div className="post-header-text">
             <h3>
-              {user.displayName}
+              {user?.displayName}
               <span className="post-header-special">
-                <VerifiedUserIcon className="post-badge" />@{user.displayName}
-                {"      "}{"Posted "+moment().startOf('hour').fromNow()}
+                <VerifiedUserIcon className="post-badge" />@{user?.displayName}
+                {"      "}{"Posted " + moment(item.timestamp).fromNow()}
               </span>
             </h3>
           </div>
@@ -45,7 +44,7 @@ const Post = ({ item }) => {
         </div>
         <img src={item.customImgUrl} alt="" />
         <div className="post-footer">
-          <ChatBubbleOutlineIcon className="icon" />
+          <ChatBubbleOutlineIcon className="icon" onClick={()=>setDisplay(!display) } />
           <RepeatIcon className="icon" />
           <div
             style={{
@@ -68,35 +67,37 @@ const Post = ({ item }) => {
           </div>
           <PublishIcon className="icon" />
         </div>
-        <div>
-          <input
-            id='comment-inp'
-            type="text"
-            placeholder='Write comments...'
-            value={inputText}
-            onChange={e => {
-              setInputText(e.target.value);
-            }}
-          />
-          <button
-            onClick={() => {
-              if (inputText.trim() === '') {
-                return;
-              }
-              item.comments = [
-                ...item?.comments,
-                { user: user.displayName, text: inputText },
-              ];
-              setUserComment({
-                ...userComment,
-                text: inputText,
-              });
-              setInputText('');
-            }}>
-            Comment
-          </button>
-        </div>
-        {item?.comments && (
+        { display &&
+          <div>
+            <input
+              id='comment-inp'
+              type="text"
+              placeholder='Write comments...'
+              value={inputText}
+              onChange={e => {
+                setInputText(e.target.value);
+              }}
+            />
+            <button
+              onClick={() => {
+                if (inputText.trim() === '') {
+                  return;
+                }
+                item.comments = [
+                  ...item?.comments,
+                  { user: user?.displayName, text: inputText },
+                ];
+                setUserComment({
+                  ...userComment,
+                  text: inputText,
+                });
+                setInputText('');
+              }}>
+              Comment
+            </button>
+          </div>
+        }
+        {display && item?.comments && (
           <div>
             {item?.comments?.map(comment => (
               <div className='comment-section'>
@@ -105,7 +106,7 @@ const Post = ({ item }) => {
                    style={{ borderRadius: '100%', height: '40px' }}
              />
                 <div>{comment?.user}
-                <VerifiedUserIcon className="post-badge"/>@<span className='post-badge-user'>{user.displayName}</span>
+                <VerifiedUserIcon className="post-badge"/>@<span className='post-badge-user'>{user?.displayName}</span>
                 </div>
                 <p>{comment?.text}</p>                
               </div>

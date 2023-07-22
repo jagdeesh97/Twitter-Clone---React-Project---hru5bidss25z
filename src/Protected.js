@@ -6,7 +6,7 @@ function Protected({ children }) {
 
     const { user, logOut } = UserAuth();
 
-    useEffect(() => logOut(), [])
+    useEffect(() => logOut())
     
     if (!user) {
         return (console.log("not user"))

@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }) => {
             .then((result) => {
                 console.log(result.user)
             }).catch((error) => {
-                console.error(error);
+                console.error("user error");
             })
     };
 
@@ -51,6 +51,7 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            console.log(currentUser)
             setUser(currentUser)
         })
         return () => {

@@ -13,35 +13,26 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import SideBarOptions from "../SideBarOptions/SideBarOptions";
 import { Button } from "@mui/material";
 import { UserAuth } from "../Context/AuthContext";
-import { useState, useEffect } from "react";
+import {useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
-    const { googleSignIn, logOut, user } = UserAuth();
+    const {logOut, user } = UserAuth();
+    const navigate = useNavigate();
 
-    const [isSignIn, setSignIn] = useState(true);
-    const [title, setTitle] = useState("Sign In");
+    useEffect(() => {
+        if (!user) {
+            navigate("/")
+        }
+    })
 
     const LoginFn = async () => {
         try {
-            let signIn = !isSignIn;
-            setSignIn(signIn);
-            if (isSignIn) {
-                await googleSignIn();
-            } else {
-                await logOut();
-            }
+            await logOut();
         } catch (error) {
             console.log(error);
         }
     };
-
-    useEffect(() => {
-        if (user != null) {
-            setTitle("Sign Out");
-        } else {
-            setTitle("Sign In");
-        }
-    }, [user]);
     return (
         <div className="sidebar">
             <TwitterIcon className="sidebar-twitter-icon" />
@@ -54,8 +45,7 @@ const SideBar = () => {
             <SideBarOptions Icon={PermIdentityIcon} text="Profile" />
             <SideBarOptions Icon={TopicIcon} text="Topics" />
             <SideBarOptions Icon={MoreHorizIcon} text="More" />
-            <Button className="signBtn" onClick={LoginFn}>{title}</Button>
-            <Button className="sidebar-tweet" variant="outlined">Tweet</Button>
+            <Button className="signBtn" onClick={LoginFn}>SignOut</Button>
         </div>
     );
 };

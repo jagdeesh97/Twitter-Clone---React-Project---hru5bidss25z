@@ -1,6 +1,7 @@
 body{
-  --twitter-color:#1DA1F2;
-  --twitter-background: #e6ecf0;
+  --twitter-color:#1DA1F2 !important;
+  --twitter-background: #e6ecf0 !important;
+  background-image: none;
 }
 
 .app{

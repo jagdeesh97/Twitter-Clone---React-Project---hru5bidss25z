@@ -25,6 +25,7 @@ const TweetBox = () => {
         customImgUrl,
         liked: 0,
         comments: [],
+        timestamp:Date.now()
       },
     ]);
     setCustomImgUrl('');
@@ -41,7 +42,6 @@ const TweetBox = () => {
         <div className="tweet-box-input">
           {/* <Avatar src="https://www.w3schools.com/howto/img_avatar.png" /> */}
           <Avatar src={imgSrc} />
-          {console.log(user.profileImg)}
           <input
             type={'text'}
             placeholder="What's happening?"
