@@ -42,7 +42,7 @@ const Post = ({ item }) => {
             <p>{item.inputText}</p>
           </div>
         </div>
-        <img src={item.customImgUrl} alt="" style={{Width: "600px"}}/>
+        <img src={item.customImgUrl} alt="" style={{maxWidth: "600px"}}/>
         <div className="post-footer">
           <ChatBubbleOutlineIcon className="icon" onClick={()=>setDisplay(!display) } />
           <RepeatIcon className="icon" />
