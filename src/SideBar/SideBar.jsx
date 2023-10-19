@@ -1,6 +1,6 @@
 import React from "react";
 import "./SideBar.css";
-import TwitterIcon from '@mui/icons-material/Twitter';
+import { FaXTwitter } from 'react-icons/fa6';
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
@@ -33,9 +33,10 @@ const SideBar = () => {
             console.log(error);
         }
     };
+    
     return (
         <div className="sidebar">
-            <TwitterIcon className="sidebar-twitter-icon" />
+            <FaXTwitter className="sidebar-twitter-icon" />
             <SideBarOptions active Icon={HomeIcon} text="Home" />
             <SideBarOptions Icon={SearchIcon} text="Explore" />
             <SideBarOptions Icon={NotificationsNoneIcon} text="Notifications" />

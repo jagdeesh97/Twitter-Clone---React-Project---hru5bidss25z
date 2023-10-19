@@ -1,12 +1,12 @@
 import React from "react";
 import "./LoginPage.css"
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { UserAuth } from "./Context/AuthContext";
 import GoogleButton from "react-google-button";
 
 
-const LoginPage = () => {
+const LoginPage = (props) => {
     const navigate = useNavigate();
     const { googleSignIn, user } = UserAuth();
 
@@ -28,7 +28,7 @@ const LoginPage = () => {
 
                 <img
                     className="image"
-                    src="http://3.bp.blogspot.com/-NxouMmz2bOY/T8_ac97cesI/AAAAAAAAGg0/e3vY1_bdnbE/s1600/Twitter+logo+2012.png"
+                    src="https://logowik.com/content/uploads/images/twitter-x5265.logowik.com.webp"
                     alt=""
                 />
             </div>
@@ -41,6 +41,16 @@ const LoginPage = () => {
                     Join Twitter today.
                 </h3>
                 <GoogleButton className="singIn" onClick={signIn} />
+
+                <div className="account">
+                    <Link to="/signup" className="create-account">Create Account</Link>
+                    <span className="policy">By signing up, you agree to the Terms of Service and Privacy Policy, including Cookie Use.</span>
+                </div>
+                <div className="alredy-account">
+                    <h2>Already have an account?</h2>
+                    <Link to="/login" className="sign-in">Login</Link>
+                </div>
+                <h3>{props.name ? `Welcome - ${props.name}` : "Login Please"}</h3>
             </div>
         </div>
     )

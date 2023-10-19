@@ -23,12 +23,11 @@ function Main() {
       <div className="app">
         <AuthContextProvider>
           <SideBar />
-          {/* feed section */}
-          {/* <Protected> */}
-            <Feed />
-            {/* widgets section */}
-            <Widgets />
-            {/* </Protected> */}
+
+          <Feed />
+
+          <Widgets />
+
         </AuthContextProvider>
       </div>
     </TweetContext.Provider>

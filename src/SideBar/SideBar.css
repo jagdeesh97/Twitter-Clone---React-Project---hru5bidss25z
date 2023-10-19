@@ -2,8 +2,8 @@
   border-right: 1px solid var(--twitter-background);
   flex: 0.3;
   min-width: 250px;
-  margin-left: 20px;
-  margin-right: 0px;
+  /* margin-left: 10px; */
+  margin-right: 15px;
 }
 
 .sidebar-twitter-icon{
