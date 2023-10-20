@@ -5,11 +5,11 @@ import InputControl from '../InputControl/InputControl';
 import { useState } from 'react';
 import { createUserWithEmailAndPassword,updateProfile  } from "firebase/auth";
 import { auth } from '../firebase';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const SignUp = () => {
-  const notify = () => toast("Wow so easy!");
+  const notify = () => toast.success("Account created Sussessfully! Now you can login");
   const navigate = useNavigate();
 
   const [values, setValues] = useState({
@@ -33,17 +33,18 @@ const SignUp = () => {
       .then( async (res) => {
         setSubmitButtonDisabled(false);
         const user  = res.user;
+        notify();
         await updateProfile(user, {
           displayName: values.name,
         });
-        notify();
-        <ToastContainer />
+       
         navigate("/login");
       })
       .catch((err) => {
         setSubmitButtonDisabled(false);
         setErrorMsg(err.message);
       });
+    
   };
 
   return (
@@ -81,6 +82,17 @@ const SignUp = () => {
           </p>
         </div>
       </div>
+      <ToastContainer 
+      position="top-center"
+      autoClose={10000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="colored"/>
     </div>
   );
 };

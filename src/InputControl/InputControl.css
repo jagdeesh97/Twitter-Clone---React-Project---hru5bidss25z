@@ -1,3 +1,4 @@
+
 .container {
     display: flex;
     flex-direction: column;
@@ -31,5 +32,5 @@
 }
 
 .container input:focus {
-    border-color: #9900ff;
+    border-color: var(--twitter-color);
 }
