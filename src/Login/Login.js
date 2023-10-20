@@ -50,7 +50,7 @@ return (
         ...prev, email: event.target.value }))}
         />
 
-        <InputControl label='Password :' placeholder='Enter your password' onChange={(event)=> setValues((prev) => ({
+        <InputControl label='Password :' type="Password" placeholder='Enter your password' onChange={(event)=> setValues((prev) => ({
           ...prev, pass: event.target.value }))}
           />
 
