@@ -1,3 +1,5 @@
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import { db } from '../firebase'; 
 import { Avatar } from '@mui/material';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import React from 'react';
@@ -18,6 +20,36 @@ const Post = ({ item }) => {
   const [userComment, setUserComment] = useState({});
   const [display, setDisplay] = useState(false);
   
+ 
+  const handleLike = async () => {
+    setIsLiked((prev) => !prev);
+
+    const tweetRef = doc(db, 'tweets', item.id);
+
+    // Update the 'liked' field in Firestore
+    await updateDoc(tweetRef, {
+      liked: isLiked ? item.liked - 1 : item.liked + 1,
+    });
+  };
+
+  const handleComment = async () => {
+    if (inputText.trim() === '') {
+      return;
+    }
+
+    const tweetRef = doc(db, 'tweets', item.id);
+
+    // Update the 'comments' field in Firestore
+    await updateDoc(tweetRef, {
+      comments: arrayUnion({ user: user?.displayName, text: inputText }),
+    });
+
+    setUserComment({
+      ...userComment,
+      text: inputText,
+    });
+    setInputText('');
+  };
 
   return (
     <div className="post">

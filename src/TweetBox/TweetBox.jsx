@@ -5,37 +5,49 @@ import { UserAuth } from '../Context/AuthContext';
 import { useState, useEffect } from 'react';
 import TweetContext from '../Context/TweetContext';
 
-const TweetBox = () => {
-  const { user } = UserAuth();
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase'; // Assuming you have a 'db' export from your firebase.js
 
-  const [imgSrc, setImgsrc] = useState('');
-  const [customImgUrl, setCustomImgUrl] = useState('');
-  const [inputText, setInputText] = useState('');
 
-  const { tweetArray, setTweetArray } = useContext(TweetContext);
+const TweetBox = () => { const { user } = UserAuth();
 
-  const submitHandler = e => {
-    e.preventDefault();
-    if (inputText.trim() === '') return;
-    setTweetArray([
-      ...tweetArray,
-      {
-        inputText,
-        imgSrc,
-        customImgUrl,
-        liked: 0,
-        comments: [],
-        timestamp:Date.now()
-      },
-    ]);
-    setCustomImgUrl('');
-    setInputText('');
+const [imgSrc, setImgsrc] = useState('');
+const [customImgUrl, setCustomImgUrl] = useState('');
+const [inputText, setInputText] = useState('');
+
+const { tweetArray, setTweetArray } = useContext(TweetContext);
+
+const submitHandler = async (e) => {
+  e.preventDefault();
+  if (inputText.trim() === '') return;
+
+  const newTweet = {
+    inputText,
+    imgSrc: user.photoURL,
+    customImgUrl,
+    liked: 0,
+    comments: [],
+    timestamp: serverTimestamp(),
   };
 
-  useEffect(() => {
-    if (user) setImgsrc(user.photoURL);
-  }, [user]);
+  // Add the new tweet to Firestore
+  const docRef = await addDoc(collection(db, 'tweets'), newTweet);
 
+  setTweetArray([
+    ...tweetArray,
+    {
+      id: docRef.id,
+      ...newTweet,
+    },
+  ]);
+
+  setCustomImgUrl('');
+  setInputText('');
+};
+
+useEffect(() => {
+  if (user) setImgsrc(user.photoURL);
+}, [user]);
   return (
     <div className="tweet-box">
       <form>
